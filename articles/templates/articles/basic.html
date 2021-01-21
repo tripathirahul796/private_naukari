@@ -14,9 +14,13 @@
    
   </head>
   <body>
+   
   
     <!-- <div class="container col-sm-8 offset-2"> -->
+      
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+
         <a class="navbar-brand" href="#">PrivateNaukari.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,12 +31,7 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'home' %}">Home </a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Fresher's</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Experiance</a>
-            </li> -->
+            
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">About Us</a>
             </li>
@@ -42,9 +41,27 @@
           </ul>
          
         </div>
+        </div>
+        
       </nav>
     {% block body %}
     {% endblock %}
+    <br><br>
+    <div id="footer" class="text-center">
+      <table>
+      <tr>
+      <td class="text-center" width="100%">
+      <div id="footer" class="text-center">
+      
+      <div id="copy"> © Copyright 2021-2022 at www.privatenaukari.com
+      <br />For advertising in this website contact us privatenaukari@gmail.com <div class="text-center" style="margin-bottom:10px"><font size="-1" color="#FF0000"><b>Disclaimer : </b>The Examination Results / Marks published in this Website is only for the immediate Information to the Examinees an does not to be a constitute to be a Legal Document. While all efforts have been made to make the Information available on this Website as Authentic as possible. We are not responsible for any Inadvertent Error that may have crept in the Examination Results / Marks being published in this Website nad for any loss to anybody or anything caused by any Shortcoming, Defect or Inaccuracy of the Information on this Website.</font></div>
+      </div>
+      </div>
+      </td>
+      </tr>
+      </table>
+
+
     <!-- </div> -->
     <!-- Optional JavaScript; choose one of the two! -->
 

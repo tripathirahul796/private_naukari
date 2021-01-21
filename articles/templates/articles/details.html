@@ -1,3 +1,4 @@
+
 {% extends 'articles/basic.html' %}
 {% block title %}Details {% endblock %}
 {% block css %}
@@ -53,7 +54,9 @@
 </style>
 {% endblock %}
 {% block body %}
-<div class="container col-sm-8 offset-2">
+<!-- for loading filter tags -->
+{% load filter_tags %}
+<div class="container col-sm-8 offset-2 ">
     <table width="100%" class="align-center">
         <tr valign="top">
             <td>
@@ -63,36 +66,29 @@
                             <tr>
                                 <td valign="top" class="text-left" style="font-weight:bold; color:#FF0033">Name of Post:</td>
                                 <td valign="top" class="text-left">
-                                    <h1>Haryana HC / HPSC Civil Judge Online Form 2021</h1>
+                                    <h1>{{job_details.0.job_title}}</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="text-left" style="font-weight:bold; color:#FF0033" >Post Date :</td>
-                                <td valign=" top" class="text-left">16 January 2021 | 11:00 AM</td>
+                                <td valign=" top" class="text-left">
+                                    {{ job_details.0.post_date|date:'d M Y | H:i ' }}
+                                </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="text-left" style="font-weight:bold; color:#FF0033" >Post Update Date :</td>
-                                <td valign=" top" class="text-left">16 January 2021 | 11:05 AM</td>
+                                <td valign=" top" class="text-left"> {{ job_details.0.post_update|date:'d M Y | H:i ' }}</td>
                             </tr>
-                            <tr>
-                                <td valign="top" class="text-left" style="font-weight:bold; color:#FF0033">Short Information : </td>
-                                <td valign="top" class="text-left">Haryana and Punjab High Court and Haryana Public
-                                    Service Commission HPSC Are Invited to Online Form for the Recruitment Post of Civil
-                                    Judge 2021. Those Candidates Are Interested to the Following Haryana Police Jobs Can
-                                    Read the Full Notification Before Apply Online.</td>
-                            </tr>
+                           
                         </table>
 
                         <table class="table table-bordered border-dark" cellspacing="0" cellpadding="0">
                             <tbody>
                                 <tr>
                                     <td colspan="10" valign="top" width="672">
-                                        <h2 class="text-center"><span style="color: #ff00ff;"><b>Haryana Public Service
-                                                    Commission (HPSC)</b></span><b></b></h2>
-                                        <h2 class="text-center"><span style="color: #008000;"><b>H.C.S. Judicial Branch
-                                                    Civil Judge Recruitment 2021</b></span><b></b></h2>
-                                        <h2 class="text-center"><span style="color: #ff00ff;"><b>Advt No. : 01/2021
-                                                    Short Details of Notification</b></span><b></b></h2>
+                                        <h2 class="text-center"><span style="color: #ff00ff;"><b>{{job_details.0.company_name}}</b></span><b></b></h2>
+                                        <h2 class="text-center"><span style="color: #008000;"><b>{{job_details.0.job_title}}</b></span><b></b></h2>
+                                        
                                         <h2 class="text-center"><span style="color: #ff0000;"><b><a
                                                         title="Private Naukari 2021 - 2022" href="#" target="_blank"
                                                         class="nounderline"><span
@@ -105,43 +101,63 @@
                                         <h2 class="text-center"><span style="color: #008000;"><b>Important
                                                     Dates</b></span><b></b></h2>
                                         <ul>
-                                            <li>Application Begin : <b>15/01/2021</b></li>
+                                            <li>Application Begin : <b> {{ job_details.0.begin_date|date:'d/m/Y ' }}</b></li>
                                             <li>Last Date for Apply Online :<span style="color: #ff0000;"><b>
-                                                        15/02/2021</b></span></li>
-                                            <li>Last Date Pay Exam Fee :<b>15/02/2021</b></li>
-                                            <li>Exam Date : <b>Notified Soon
+                                                {{ job_details.0.last_date|date:'d/m/Y'}}</b></span></li>
+                                            {% if job_details.0.admitcard_date %}
+                                                <li>Admit Card Available : <b>{{job_details.0.admitcard_date}}</b></li>
+                                            {% endif %}
+                                            {% if job_details.0.exam_date %}
+                                                <li>Exam Date : <b> {{ job_details.0.exam_date  }}
                                                 </b></li>
-                                            <li>Interview Date : <b>Notified Soon</b></li>
+                                            {% endif %}
+                                            {% if job_details.0.interview_date %}
+                                            <li>Interview Date : <b>{{job_details.0.interview_date}}</b></li>
+                                            {% endif %}
+                                            {% if job_details.0.result_date %}
+                                            <li>Result Date : <b>{{job_details.0.result_date}}</b></li>
+                                            {% endif %}
                                         </ul>
                                     </td>
                                     <td colspan="4" valign="top" width="318">
-                                        <h2 class="text-center"><span style="color: #008000;"><b>Application
-                                                    Fee</b></span><b></b></h2>
+                                        <h2 class="text-center"><span style="color: #008000;"><b>Selection Procedure</b></span><b></b></h2>
                                         <ul>
-                                            <li>General / EWS <b>: 1000/-</b></li>
-                                            <li>Haryana Reserve Category <b>: 250/-</b></li>
-                                            <li>Female Haryana : <b>250/-</b></li>
-                                            <li>Pay the Examination Fee Through Cash at Debit Card, Credit Card, Net
-                                                Banking Fee Mode Only</li>
+                                            {% with job_details.0.selection_procedure|split:"," as procedures %}
+                                                {% for process in procedures %}
+                                                    <li>{{ process}}</li>
+                                                {% endfor %}
+                                            {% endwith %}
+                                            
+                                            
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="10" valign="top" width="672">
+                                    <td colspan="6" valign="top" width="672">
                                         <h2 class="text-center"><span style="color: #008000;"><b>Age Limit <span
                                                         style="color: #008000;">as on </span></b><span
-                                                    style="color: #ff00ff;"><b>15/02/2021</b></span></span><b></b></h2>
+                                                    style="color: #ff00ff;"><b> {{ job_details.0.last_date|date:'d/m/Y ' }}</b></span></span><b></b></h2>
                                         <ul>
-                                            <li>Minimum Age : <b>21 Years.</b></li>
-                                            <li>Maximum Age : <b>42 Years.</b></li>
-                                            <li>Age Relaxation Extra as per Rules :</li>
+                                            <li>Minimum Age : <b>{{job_details.0.min_age}}      Years.</b></li>
+                                            <li>Maximum Age : <b>{{job_details.0.max_age}}      Years.</b></li>
+                                            
+                                        </ul>
+                                    </td>
+                                    <td colspan="4" valign="top" width="318">
+                                        <h2 class="text-center"><span style="color: #008000;"><b>Location</b></span><b></b></h2>
+                                        <ul>
+                                            {% with job_details.0.location|split:"," as locations %}
+                                                {% for location in locations  %}
+                                                    <li>{{location}}</li>
+                                                {% endfor %}
+                                            {% endwith %}
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="10" valign="top" width="672">
                                         <h2 class="text-center"><span style="color: #008000;"><span
-                                                    style="color: #ff00ff;"><b>Vacancy Details</b></span><b> Total : 239
+                                                    style="color: #ff00ff;"><b>Vacancy Details</b></span><b> Total : {{job_details.0.total_post}}
                                                     Post</b></span><b></b></h2>
                                     </td>
                                 </tr>
@@ -158,84 +174,50 @@
                                 </tr>
                                 <tr>
                                     <td valign="top" width="127">
-                                        <p class="text-center">Civil Judge</p>
+                                        <p class="text-center">{{job_details.0.post_name}}</p>
                                     </td>
                                     <td colspan="2" valign="top" width="71">
-                                        <p class="text-center">239</p>
+                                        <p class="text-center">{{job_details.0.total_post}}</p>
                                     </td>
                                     <td colspan="7" valign="top" width="474">
                                         <ul>
-                                            <li>Bachelor Degree in Law LLB Degree in Any Recognized University in India.
-                                            </li>
+                                            {% with job_details.0.eligibility|split:","  as eligibilitys %}
+                                                {% for eligibility in eligibilitys %}
+                                                    <li>{{eligibility}}</li>
+                                                {% endfor %}
+                                            {% endwith %}
+                                            
+                                           
+                                            
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="10" valign="top" width="672">
-                                        <h2 class="text-center"><span style="color: #008000;"><b>Category Wise Vacancy
-                                                    Details</b></span></h2>
+                                        <h2 class="text-center"><span style="color: #008000;"><b>Full Job Description</b></span></h2>
                                     </td>
+                                   
                                 </tr>
                                 <tr>
-                                    <td colspan="2" valign="top" width="129">
-                                        <p class="text-center"><b>General</b></p>
+                                    <td colspan="10" valign="top" width="672">
+                                        {{job_details.0.job_description}}
                                     </td>
-                                    <td colspan="2" valign="top" width="139">
-                                        <p class="text-center"><b>EWS</b></p>
-                                    </td>
-                                    <td colspan="3" valign="top" width="106">
-                                        <p class="text-center"><b>BC A</b></p>
-                                    </td>
-                                    <td valign="top" width="102">
-                                        <p class="text-center"><b>BC B</b></p>
-                                    </td>
-                                    <td valign="top" width="97">
-                                        <p class="text-center"><b>SC</b></p>
-                                    </td>
-                                    <td valign="top" width="100">
-                                        <p class="text-center"><b>Total</b></p>
-                                    </td>
+                                   
                                 </tr>
-                                <tr>
-                                    <td colspan="2" valign="top" width="129">
-                                        <p class="text-center">156</p>
-                                    </td>
-                                    <td colspan="2" valign="top" width="139">
-                                        <p class="text-center">11</p>
-                                    </td>
-                                    <td colspan="3" valign="top" width="106">
-                                        <p class="text-center">21</p>
-                                    </td>
-                                    <td valign="top" width="102">
-                                        <p class="text-center">11</p>
-                                    </td>
-                                    <td valign="top" width="97">
-                                        <p class="text-center">40</p>
-                                    </td>
-                                    <td valign="top" width="100">
-                                        <p class="text-center">259</p>
-                                    </td>
-                                </tr>
+
+                                
                                 <tr>
                                     <td colspan="10" valign="top" width="672">
 
-                                        <h2 class="text-center"><span style="color: #008000;"><b>How to Fill
-                                                    Form</b></span></h2>
-                                        <ul>
-                                            <li>Punjab &amp; Haryana High Court / Haryana Public Service Commission HPSC
-                                                Are Released Civil Judge 01/2021 Recruitment 2021. Candidate Can Apply
-                                                Between <strong>15/01/2021 to 15/02/2021</strong></li>
-                                            <li>Candidate Read the Notification Before Apply the Recruitment Application
-                                                Form in Civil Judge HCS Recruitment 2021.</li>
-                                            <li>Kindly Check and Collect the All Document - Eligibility, ID Proof,
-                                                Address Details, Basic Details.</li>
-                                            <li>Kindly Ready Scan Document Related to Admission Entrance Form - Photo,
-                                                Sign, ID Proof, Etc.</li>
-                                            <li>Before Submit the Application Form Must Check the Preview and All Column
-                                                Carefully.</li>
-                                            <li>Take A Print Out of Final Submitted Form.</li>
-                                        </ul>
+                                        <h2 class="text-center"><span style="color: #008000;"><b>About Company</b></span></h2>
+                                        
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" valign="top" width="672">
+                                        {{job_details.0.about_company}}
+                                    </td>
+                                   
                                 </tr>
                                 <tr>
                                     <td colspan="10" valign="top" width="672">
@@ -252,13 +234,37 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    {% if job_details.0.result_link %}
+                                    <td colspan="5" valign="top" width="351">
+                                        <h2 class="text-center"><span style="color: #ff00ff;"><b>Download Result</b></span><b></b></h2>
+                                    </td>
+                                    <td colspan="5" valign="top" width="321">
+                                        <h2 class="text-center"><b><a
+                                                    href="{{job_details.0.result_link}}"
+                                                    target="_blank" class="nounderline">Click Here</a></b></h2>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    {% if job_details.0.admitcard_link %}
+                                    <td colspan="5" valign="top" width="351">
+                                        <h2 class="text-center"><span style="color: #ff00ff;"><b>Download Admit Card</b></span><b></b></h2>
+                                    </td>
+                                    <td colspan="5" valign="top" width="321">
+                                        <h2 class="text-center"><b><a
+                                                    href="{{job_details.0.admitcard_link}}"
+                                                    target="_blank" class="nounderline">Click Here</a></b></h2>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
                                     <td colspan="5" valign="top" width="351">
                                         <h2 class="text-center"><span style="color: #ff00ff;"><b>Apply
                                                     Online</b></span><b></b></h2>
                                     </td>
                                     <td colspan="5" valign="top" width="321">
                                         <h2 class="text-center"><b><a
-                                                    href="https://cdn3.digialm.com/EForms/configuredHtml/31253/69421/Registration.html"
+                                                    href="{{job_details.0.apply_link}}"
                                                     target="_blank" class="nounderline">Click Here</a></b></h2>
                                     </td>
                                 </tr>
@@ -269,18 +275,16 @@
                                                     Website</b></span><b></b></h2>
                                     </td>
                                     <td colspan="5" valign="top" width="321">
-                                        <h2 class="text-center"><b><a title="" href="#" target="_blank"
+                                        <h2 class="text-center"><b><a title="" href="{{job_details.0.offical_link}}" target="_blank"
                                                     class="nounderline">Click Here </a></b></h2>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="10" valign="top" width="672">
-                                        <h2 class="text-center"><span style="color: #008000;"><b>Find More Latest
-                                                    Updates</b></span><b></b></h2>
-
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                 </div>
+            
+            </div>
+                
+                    
                 {% endblock %}

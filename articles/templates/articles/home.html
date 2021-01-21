@@ -23,13 +23,17 @@
                   
                <div class="card">
                   <div class="card-header text-center">
-                    <span><b>CS/IT</b></span>
+                    <span><b>Result</b></span>
                   </div>
                   <div class="card-body">
                    <ul>
-                      <li><a href="#" target="_blank" rel="noopener noreferrer">Infosys</a></li>
-                      
-                     </ul>
+                    {% for job in job_list %}
+                    {% if job.result_date %}
+                    <li><a href="{% url  'details'  job.id job.job_title  %}" class="nounderline"  target="_blank">{{job.job_title }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  </ul>
+                     
                      <a title="" href="#" target="_blank" class="nounderline">View More</a>
                      
                      
@@ -39,12 +43,17 @@
               <div class="col-sm-4  table-responsive" >
                <div class="card">
                   <div class="card-header text-center">
-                    <span><b>Mechanical</b></span>
+                    <span><b>Admit Card</b></span>
                   </div>
                   <div class="card-body">
                    <ul>
-                      <li><a href="#" target="_blank" rel="noopener noreferrer">Infosys</a></li>
-                    </ul>
+                    {% for job in job_list %}    
+                      {% if job.admitcard_date %}
+                        <li><a href="{% url  'details'  job.id job.job_title  %}" class="nounderline"  target="_blank">{{job.job_title}}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                  
+                  </ul>
                     <a title="" href="#" target="_blank" class="nounderline">View More</a>
                   </div>
                 </div>
@@ -53,11 +62,13 @@
                   
                <div class="card">
                   <div class="card-header text-center">
-                    <span><b>Civil</b></span>
+                    <span><b>Latest Jobs</b></span>
                   </div>
                   <div class="card-body">
                    <ul>
-                      <li><a href="#" target="_blank" rel="noopener noreferrer">Infosys</a></li>
+                    {% for job in job_list %}
+                    <li><a href="{% url  'details'  job.id job.job_title  %}" class="nounderline"  target="_blank">{{job.job_title}}</a></li>
+                    {% endfor %}
                     </ul>
                     <a title="" href="#" target="_blank" class="nounderline">View More</a>
                   </div>
@@ -69,7 +80,7 @@
                   
                <div class="card">
                   <div class="card-header text-center">
-                    <span><b>EC/EN</b></span>
+                    <span><b>Model Papers</b></span>
                   </div>
                   <div class="card-body">
                    <ul>
@@ -84,11 +95,15 @@
                   
                <div class="card">
                   <div class="card-header text-center">
-                    <span><b>Experiance</b></span>
+                    <span><b>Syllabus</b></span>
                   </div>
                   <div class="card-body">
                    <ul>
-                      <li><a href="#" target="_blank" rel="noopener noreferrer">Infosys</a></li>
+                      {% for job in job_list %}
+                        {% if job.syllabus_link %}
+                        <li><a href="{% url  'details'  job.id job.job_title  %}" class="nounderline"  target="_blank">{{job.job_title }}</a></li>
+                        {% endif %}
+                      {% endfor %}
                       
                    </ul>
                    <a title="" href="#" target="_blank" class="nounderline">View More</a>
@@ -112,6 +127,6 @@
                 </div>
               </div>
         </div>
-      </div>
+      
     
  {% endblock %}
